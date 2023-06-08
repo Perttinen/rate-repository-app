@@ -15,13 +15,6 @@ const styles = StyleSheet.create({
 const AppBarItem = ({ text, to }) => {
 
   return(   
-    // <Pressable style={styles.flexItem} onPressIn={() => console.log('pressed')}>
-    //   <Link to={to}>
-    //     <Text color='light' fontSize='subheading' fontWeight='bold'>
-    //       {text}
-    //     </Text>
-    //   </Link>
-    // </Pressable>
 
     <View style={styles.flexItem}>
       <Link to={to}>

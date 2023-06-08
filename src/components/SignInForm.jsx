@@ -10,14 +10,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     justifyContent: 'space-evenly',
   },
-  inn:{
+  inn:{  
     margin:10,
     marginBottom:5,
     borderColor: 'gray',
     borderWidth: 2,
     borderRadius: 5,
     padding: 5,
-    paddingLeft: 10
+    paddingLeft: 10,
   },
   button: {
     margin: 10,
@@ -29,19 +29,18 @@ const styles = StyleSheet.create({
     padding: 10
   }
 })
-
-const BodyMassIndexForm = ({ onSubmit }) => { 
+const SignInForm = ({ onSubmit }) => { 
   return (
     <View style={styles.container}>
-       <FormikTextInput name="mass" placeholder="Weight (kg)" style={styles.inn} /> 
-       <FormikTextInput name="height" placeholder="Height (m)" style={styles.inn}/> 
+       <FormikTextInput name="username" placeholder="Username" style={styles.inn} /> 
+       <FormikTextInput secureTextEntry={true} name="password" placeholder="Password" style={styles.inn}/> 
        <View style={styles.button}>
         <Pressable onPress={onSubmit}>
-          <Text color='light' fontSize='subheading' fontWeight='bold'>Calculate</Text>
+          <Text color='light' fontSize='subheading' fontWeight='bold'>Sign in</Text>
         </Pressable>
       </View>
     </View>
   );
 };
 
-export default BodyMassIndexForm
+export default SignInForm

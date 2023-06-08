@@ -1,5 +1,7 @@
-import { Text, TextInput, Pressable, View } from 'react-native';
-import { Formik, useField } from 'formik';
+
+import { Formik } from 'formik';
+
+import BodyMassIndexForm from './BodyMassIndexForm';
 
 const initialValues = {
   mass: '',
@@ -8,29 +10,6 @@ const initialValues = {
 
 const getBodyMassIndex = (mass, height) => {
   return Math.round(mass / Math.pow(height, 2));
-};
-
-const BodyMassIndexForm = ({ onSubmit }) => {
-  const [massField, massMeta, massHelpers] = useField('mass');
-  const [heightField, heightMeta, heightHelpers] = useField('height');
-
-  return (
-    <View>
-      <TextInput
-        placeholder="Weight (kg)"
-        value={massField.value}
-        onChangeText={text => massHelpers.setValue(text)}
-      />
-      <TextInput
-        placeholder="Height (m)"
-        value={heightField.value}
-        onChangeText={text => heightHelpers.setValue(text)}
-      />
-      <Pressable onPress={onSubmit}>
-        <Text>Calculate</Text>
-      </Pressable>
-    </View>
-  );
 };
 
 const BodyMassIndexCalculator = () => {
