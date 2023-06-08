@@ -1,6 +1,7 @@
-import { StyleSheet, Pressable } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import theme from '../theme';
 import Text from './Text';
+import { Link } from 'react-router-native';
 
 const styles = StyleSheet.create({
   flexItem: {
@@ -11,13 +12,26 @@ const styles = StyleSheet.create({
   }
 });
 
-const AppBarItem = ({ text }) => {
-  return(
-    <Pressable style={styles.flexItem} onPressIn={() => console.log('pressed')}>
-      <Text color='light' fontSize='subheading' fontWeight='bold'>
-        {text}
-      </Text>
-    </Pressable>
+const AppBarItem = ({ text, to }) => {
+
+  return(   
+    // <Pressable style={styles.flexItem} onPressIn={() => console.log('pressed')}>
+    //   <Link to={to}>
+    //     <Text color='light' fontSize='subheading' fontWeight='bold'>
+    //       {text}
+    //     </Text>
+    //   </Link>
+    // </Pressable>
+
+    <View style={styles.flexItem}>
+      <Link to={to}>
+        <Text color='light' fontSize='subheading' fontWeight='bold'>
+          {text}
+        </Text>
+      </Link>
+    </View>
+  
+
   )
 }
 

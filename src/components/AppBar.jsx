@@ -5,17 +5,17 @@ import AppBarItem from './AppBarItem';
 
 const styles = StyleSheet.create({
   container: {
-    height: 50,
+    height: 35,
     flexDirection: 'row',
     marginTop: Constants.statusBarHeight,
-    backgroundColor: 'grey'
+    backgroundColor: 'lightgrey'
   }
 });
 
 const AppBar = () => {
   return <View style={styles.container}>
-            <AppBarItem text='Repositories'/>
-            <AppBarItem text='joo'/>
+            <AppBarItem text='Repositories' to='/'/>
+            <AppBarItem text='Sign-in' to="/sign-in"/>
           </View>;
 };
 
