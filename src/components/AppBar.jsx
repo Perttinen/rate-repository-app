@@ -1,6 +1,5 @@
 import { View, StyleSheet, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
-// import theme from '../theme';
 import AppBarItem from './AppBarItem';
 
 const styles = StyleSheet.create({
@@ -8,7 +7,7 @@ const styles = StyleSheet.create({
     height: 35,
     flexDirection: 'row',
     marginTop: Constants.statusBarHeight,
-    backgroundColor: 'lightgrey'
+    backgroundColor: 'lightgrey'   
   }
 });
 
