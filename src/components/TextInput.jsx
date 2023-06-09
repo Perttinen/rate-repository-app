@@ -1,8 +1,10 @@
 import { TextInput as NativeTextInput, StyleSheet} from 'react-native';
 
+import theme from '../theme';
+
 const styles = StyleSheet.create({
   errorStyle: {
-    borderColor: '#d73a4a'
+    borderColor: theme.colors.error
   }
 });
 

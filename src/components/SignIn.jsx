@@ -16,12 +16,10 @@ const initialValues = {
 };
 
 const SignIn = () => {
+  
   const onSubmit = values => {
     const username = values.username;
-    // const pwd = values.pwd;
-
     console.log(`${username} Signed in!`);
-    
   };
 
   return (

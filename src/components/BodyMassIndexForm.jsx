@@ -7,13 +7,13 @@ import Text from "./Text";
 const styles = StyleSheet.create({
   container:{
     flexDirection: 'column',
-    backgroundColor: 'white',
+    backgroundColor: theme.colors.light,
     justifyContent: 'space-evenly',
   },
-  inn:{
+  input:{
     margin:10,
     marginBottom:5,
-    borderColor: 'gray',
+    borderColor: theme.colors.inputBorder,
     borderWidth: 2,
     borderRadius: 5,
     padding: 5,
@@ -33,8 +33,8 @@ const styles = StyleSheet.create({
 const BodyMassIndexForm = ({ onSubmit }) => { 
   return (
     <View style={styles.container}>
-       <FormikTextInput name="mass" placeholder="Weight (kg)" style={styles.inn} /> 
-       <FormikTextInput name="height" placeholder="Height (m)" style={styles.inn}/> 
+       <FormikTextInput name="mass" placeholder="Weight (kg)" style={styles.input} /> 
+       <FormikTextInput name="height" placeholder="Height (m)" style={styles.input}/> 
        <View style={styles.button}>
         <Pressable onPress={onSubmit}>
           <Text color='light' fontSize='subheading' fontWeight='bold'>Calculate</Text>

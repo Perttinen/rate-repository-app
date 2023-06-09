@@ -1,16 +1,15 @@
 import { View, Image } from 'react-native';
-import Text from './Text'
-
 import { StyleSheet } from 'react-native';
-import theme from '../theme';
 
+import Text from './Text'
+import theme from '../theme';
 import RepoStatistics from './RepoStatistics';
 
 const styles = StyleSheet.create({
   mainContainer: {
     padding: 10,
     flexDirection: 'column',
-    backgroundColor: 'white',
+    backgroundColor: theme.colors.light,
   },
   columnContainer:{
     flex:1,
@@ -36,23 +35,23 @@ const styles = StyleSheet.create({
 
 const Item = ({repository}) => {
   return(
-  <View style={styles.mainContainer}>
-    <View style={styles.rowContainer}>
-      <Image 
-        style={styles.image}
-        source={{uri: repository.ownerAvatarUrl,}}
-      />
-      <View style={styles.columnContainer}>
-        <Text fontWeight="bold" fontSize="subheading"> {repository.fullName}</Text>
-        <Text  color="textSecondary"> {repository.description}</Text>
-        <View style={styles.tag}>
-          <Text color='light'>{repository.language}</Text>
+    <View style={styles.mainContainer}>
+      <View style={styles.rowContainer}>
+        <Image 
+          style={styles.image}
+          source={{uri: repository.ownerAvatarUrl,}}
+        />
+        <View style={styles.columnContainer}>
+          <Text fontWeight="bold" fontSize="subheading"> {repository.fullName}</Text>
+          <Text  color="textSecondary"> {repository.description}</Text>
+          <View style={styles.tag}>
+            <Text color='light'>{repository.language}</Text>
+          </View>
         </View>
       </View>
+      <RepoStatistics repository={repository}/>
     </View>
-    <RepoStatistics repository={repository}/>
-  </View>
   )
-  };
+};
 
 export default Item

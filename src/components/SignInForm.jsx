@@ -7,13 +7,13 @@ import Text from "./Text";
 const styles = StyleSheet.create({
   container:{
     flexDirection: 'column',
-    backgroundColor: 'white',
+    backgroundColor: theme.colors.light,
     justifyContent: 'space-evenly',
   },
-  inn:{  
+  input:{  
     margin:10,
     marginBottom:5,
-    borderColor: 'gray',
+    borderColor: theme.colors.inputBorder,
     borderWidth: 2,
     borderRadius: 5,
     padding: 5,
@@ -29,11 +29,12 @@ const styles = StyleSheet.create({
     padding: 10
   }
 })
-const SignInForm = ({ onSubmit }) => { 
+
+const SignInForm = ({ onSubmit }) => {
   return (
     <View style={styles.container}>
-       <FormikTextInput name="username" placeholder="Username" style={styles.inn} /> 
-       <FormikTextInput secureTextEntry={true} name="password" placeholder="Password" style={styles.inn}/> 
+       <FormikTextInput name="username" placeholder="Username" style={styles.input} /> 
+       <FormikTextInput secureTextEntry={true} name="password" placeholder="Password" style={styles.input}/> 
        <View style={styles.button}>
         <Pressable onPress={onSubmit}>
           <Text color='light' fontSize='subheading' fontWeight='bold'>Sign in</Text>
