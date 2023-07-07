@@ -3,6 +3,7 @@ import * as yup from 'yup';
 
 import SignInForm from './SignInForm';
 import useSignIn from '../hooks/useSignIn';
+import AuthStorage from '../utils/authStorage';
 
 const validationSchema = yup.object().shape({
   username: yup.string()
@@ -18,11 +19,13 @@ const initialValues = {
 
 const SignIn = () => {
   const [signIn] = useSignIn();
+  const authStore = new AuthStorage('authStore')
+
   const onSubmit = async (values) => {
     const { username, password } = values;
     try {
       const { data } = await signIn({ username, password });
-      console.log(data);
+      await authStore.setAccessToken(data.authenticate.accessToken)   
     } catch (e) {
       console.log(e);
     }
