@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Pressable } from 'react-native';
 import { Link } from 'react-router-native';
 
 import theme from '../theme';
@@ -12,17 +12,21 @@ const styles = StyleSheet.create({
   }
 });
 
-const AppBarItem = ({ text, to }) => {
+const AppBarItem = ({ to, onPress, children}) => {
 
-  return(   
-    <View style={styles.flexItem}>
-      <Link to={to}>
-        <Text color='light' fontSize='subheading' fontWeight='bold'>
-          {text}
-        </Text>
-      </Link>
-    </View>
-  )
+  return onPress ? (
+    <Pressable onPress={onPress} style={styles.flexItem}>
+      <Text color='light' fontSize='subheading' fontWeight='bold' >
+        {children}
+      </Text>
+    </Pressable>
+  ) : (
+    <Link to={to} style={styles.flexItem}>
+      <Text color='light' fontSize='subheading' fontWeight='bold'>
+        {children}
+      </Text>
+    </Link>
+  );
 }
 
 export default AppBarItem
