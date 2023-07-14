@@ -48,9 +48,8 @@ describe('RepositoryList', () => {
         ],
       };
 
-      // Add your test code here
       render(<RepositoryListContainer repositories={repositories}/>)
-
+    
       const repositoryItems = screen.getAllByTestId('repositoryItem');
       const [firstRepositoryItem, secondRepositoryItem] = repositoryItems;
 

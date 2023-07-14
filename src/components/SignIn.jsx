@@ -18,20 +18,7 @@ const initialValues = {
   password: '',
 };
 
-const SignIn = () => {
-  const [signIn] = useSignIn();
-  const navigate = useNavigate();
-
-  const onSubmit = async (values) => {
-    const { username, password } = values;   
-    try {
-      await signIn({ username, password });
-      navigate('/')
-    } catch (e) {
-      console.log('error: ',e);
-    }
-  };
-
+export const SignInContainer = ({onSubmit}) => {
   return (
     <Formik
       initialValues={initialValues}
@@ -41,6 +28,24 @@ const SignIn = () => {
       {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
     </Formik>
   );
+}
+
+const SignIn = () => {
+  const [signIn] = useSignIn();
+  const navigate = useNavigate();
+
+  const onSubmit = async (values) => {
+    const { username, password } = values;
+    console.log(username);
+       
+    try {
+      await signIn({ username, password });
+      navigate('/')
+    } catch (e) {
+      console.log('error: ',e);
+    }
+  };
+  return <SignInContainer onSubmit={onSubmit}/>
 };
 
 export default SignIn
