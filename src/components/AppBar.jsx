@@ -7,14 +7,6 @@ import AppBarItem from './AppBarItem';
 import { GET_ME } from '../graphql/queries';
 import { useAuthStorage } from '../hooks/useAuthStorage';
 
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    marginTop: Constants.statusBarHeight,
-    backgroundColor: theme.colors.mainBackgroud 
-  }
-});
-
 const AppBar = () => {
 
 const authStorage = useAuthStorage()
@@ -45,5 +37,13 @@ const handleSignOut = async () => {
     </View>
   )
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: 'row',
+    marginTop: Constants.statusBarHeight,
+    backgroundColor: theme.colors.mainBackgroud 
+  }
+});
 
 export default AppBar;

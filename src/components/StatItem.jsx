@@ -3,16 +3,7 @@ import { View, StyleSheet } from "react-native"
 import Text from "./Text"
 
 const StatItem = ({text, num}) => {
-
-  const styles = StyleSheet.create({
-    columnContainer:{
-      flexDirection: 'column',   
-    },
-    text:{
-      alignSelf: 'center',
-    }
-  })
-
+  
   const formatNumber = (numAsText) =>{
     let num = parseFloat(numAsText)
     if (num > 1000){
@@ -29,5 +20,14 @@ const StatItem = ({text, num}) => {
     </View> 
   )
 }
+
+const styles = StyleSheet.create({
+  columnContainer:{
+    flexDirection: 'column',   
+  },
+  text:{
+    alignSelf: 'center',
+  }
+})
 
 export default StatItem

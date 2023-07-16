@@ -4,14 +4,6 @@ import { Link } from 'react-router-native';
 import theme from '../theme';
 import Text from './Text';
 
-const styles = StyleSheet.create({
-  flexItem: {
-    backgroundColor: theme.colors.darkBackground,
-    marginHorizontal: 2,
-    padding: 8,
-  }
-});
-
 const AppBarItem = ({ to, onPress, children}) => {
 
   return onPress ? (
@@ -28,5 +20,13 @@ const AppBarItem = ({ to, onPress, children}) => {
     </Link>
   );
 }
+
+const styles = StyleSheet.create({
+  flexItem: {
+    backgroundColor: theme.colors.darkBackground,
+    marginHorizontal: 2,
+    padding: 8,
+  }
+});
 
 export default AppBarItem

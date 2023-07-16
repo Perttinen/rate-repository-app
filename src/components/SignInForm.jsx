@@ -1,47 +1,43 @@
-import { View, Pressable, StyleSheet } from "react-native";
+import { View, StyleSheet, Text, TouchableHighlight} from "react-native";
 
 import theme from "../theme";
 import FormikTextInput from "./FormikTextInput";
-import Text from "./Text";
-
-const styles = StyleSheet.create({
-  container:{
-    flexDirection: 'column',
-    backgroundColor: theme.colors.light,
-    justifyContent: 'space-evenly',
-  },
-  input:{  
-    margin:10,
-    marginBottom:5,
-    borderColor: theme.colors.inputBorder,
-    borderWidth: 2,
-    borderRadius: 5,
-    padding: 5,
-    paddingLeft: 10,
-  },
-  button: {
-    margin: 10,
-    flexDirection: 'row',
-    color: theme.colors.light,
-    backgroundColor: theme.colors.primary,
-    borderRadius: 5,
-    justifyContent: 'center',
-    padding: 10
-  }
-})
+import { fullWidthButton } from "../theme";
 
 const SignInForm = ({ onSubmit }) => {
   return (
     <View style={styles.container}>
        <FormikTextInput testID='username' name="username" placeholder="Username" style={styles.input} /> 
        <FormikTextInput testID='password' secureTextEntry={true} name="password" placeholder="Password" style={styles.input}/> 
-       <View style={styles.button}>
-        <Pressable onPress={onSubmit}>
-          <Text color='light' fontSize='subheading' fontWeight='bold'>Sign in</Text>
-        </Pressable>
-      </View>
+        <TouchableHighlight onPress={onSubmit} style={styles.fullWidthButton}>
+          <Text style={styles.text}> Sign in</Text>
+        </TouchableHighlight>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  fullWidthButton,
+  container:{
+    flexDirection: 'column',
+    backgroundColor: theme.colors.light,
+    justifyContent: 'space-evenly',
+    padding:10,
+  },
+  input:{  
+    marginBottom:10,
+    borderColor: theme.colors.inputBorder,
+    borderWidth: 2,
+    borderRadius: 5,
+    padding: 5,
+    paddingLeft: 10,
+  },
+  text:{
+    color: theme.colors.light,
+    textAlign: 'center',
+    fontWeight: theme.fontWeights.bold,
+    fontSize: theme.fontSizes.button
+  }
+})
 
 export default SignInForm
