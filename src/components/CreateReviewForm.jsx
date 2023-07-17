@@ -5,6 +5,7 @@ import FormikTextInput from "./FormikTextInput";
 import { fullWidthButton } from "../theme";
 
 const CreateReviewForm = ({ onSubmit }) => {
+
   return (
     <View style={styles.container}>
        <FormikTextInput name="ownerName" placeholder="Repository owner name" style={styles.input} /> 

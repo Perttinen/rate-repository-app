@@ -1,6 +1,7 @@
 import { View, StyleSheet, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
 import { useQuery, useApolloClient } from '@apollo/client';
+import { useNavigate } from 'react-router-native';
 
 import theme from '../theme';
 import AppBarItem from './AppBarItem';
@@ -8,7 +9,7 @@ import { GET_ME } from '../graphql/queries';
 import { useAuthStorage } from '../hooks/useAuthStorage';
 
 const AppBar = () => {
-
+const navigate = useNavigate()
 const authStorage = useAuthStorage()
 const apolloClient = useApolloClient()
 
@@ -18,17 +19,22 @@ const {data} = useQuery(GET_ME, {
 
 const currentUser = data?.me;
 
+console.log(currentUser);
+
 const handleSignOut = async () => {
   await authStorage.removeAccessToken()
   await apolloClient.resetStore()
+  navigate('/')
   console.log('signed out');
 };
+
+const path = "/createReview/" + currentUser
 
   return(
     <View style={styles.container}>
       <ScrollView horizontal>
         <AppBarItem to="/">Repositories</AppBarItem>
-        <AppBarItem to="/createReview">Create a review</AppBarItem>
+        <AppBarItem to={path}>Create a review</AppBarItem>
         {currentUser ? (
           <AppBarItem onPress={handleSignOut}>Sign out</AppBarItem>
         ) : (

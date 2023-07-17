@@ -17,7 +17,7 @@ const Main = () => {
         <Route path="/" element={<RepositoryList />} exact />
         <Route path="/sign-in" element={<SignIn />} exact />
         <Route path="/singleRepo/:id" element={<SingleRepository/>} exact />
-        <Route path="/createReview" element={<CreateReview />} exact />
+        <Route path="/createReview/:currentUser" element={<CreateReview />} exact />
         <Route path='*' element={<Navigate to='/' replace />} />
       </Routes>
       <StatusBar style='auto'/>
