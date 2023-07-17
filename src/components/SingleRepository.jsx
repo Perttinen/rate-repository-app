@@ -10,11 +10,11 @@ import ReviewItem from "./ReviewItem";
 const SingleRepository  = () => {
   const id = useParams().id
   const repository = useQuery(GET_REPOSITORY, {
-    variables: {
-      "repositoryId": id
-    }, 
+    variables: { "repositoryId": id }, 
     fetchPolicy: 'cache-and-network'}
   )
+
+  console.log(repository);
 
   const reviews = useQuery(GET_REVIEWS, {
     variables: {

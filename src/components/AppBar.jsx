@@ -28,6 +28,7 @@ const handleSignOut = async () => {
     <View style={styles.container}>
       <ScrollView horizontal>
         <AppBarItem to="/">Repositories</AppBarItem>
+        <AppBarItem to="/createReview">Create a review</AppBarItem>
         {currentUser ? (
           <AppBarItem onPress={handleSignOut}>Sign out</AppBarItem>
         ) : (
