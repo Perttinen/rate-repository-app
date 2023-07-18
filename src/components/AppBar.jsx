@@ -19,8 +19,6 @@ const {data} = useQuery(GET_ME, {
 
 const currentUser = data?.me;
 
-console.log(currentUser);
-
 const handleSignOut = async () => {
   await authStorage.removeAccessToken()
   await apolloClient.resetStore()
@@ -40,6 +38,7 @@ const path = "/createReview/" + currentUser
         ) : (
           <AppBarItem to="/sign-in">Sign in</AppBarItem>
         )}
+        <AppBarItem to="/sign-up">Sign up</AppBarItem>
       </ScrollView>
     </View>
   )
