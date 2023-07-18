@@ -1,14 +1,17 @@
-import { FlatList, View, StyleSheet } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
+import { FlatList, View, StyleSheet, Picker } from 'react-native';
 import { useState } from 'react';
+import { Searchbar } from 'react-native-paper';
+import { useDebounce } from 'use-debounce';
 
 import Item from './RepositoryItem';
 import useRepositories from '../hooks/useRepositories';
 
 const RepositoryList = () => {
   const [order, setOrder] = useState();
+  const [searchQuery, setSearchQuery] = useState('')
+  const [value] = useDebounce(searchQuery,1000)
 
-  const { repositories } = useRepositories(order);
+  const { repositories } = useRepositories(order, value);
 
   const repositoryNodes = repositories
   ? repositories.edges.map((edge) => edge.node)
@@ -19,7 +22,7 @@ return (
     data={repositoryNodes}
     ItemSeparatorComponent={ItemSeparator}
     renderItem={({item}) => <Item repository={item} />}
-    ListHeaderComponent={<SortBy order={order} setOrder={setOrder}/>}
+    ListHeaderComponent={<SortBy order={order} setOrder={setOrder} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />}
   />
 );
   // return <RepositoryListContainer repositories={repositories} />;
@@ -27,10 +30,21 @@ return (
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-const SortBy = ({order, setOrder}) => {
+const SortBy = ({order, setOrder, searchQuery, setSearchQuery}) => {
+
+  const onChangeSearch = query => setSearchQuery(query);
+
   return(
+    <View>
+    <Searchbar
+      mode='view'
+      placeholder="Search"
+      onChangeText={onChangeSearch}
+      value={searchQuery}
+      style={{justifyContent:'center'}}
+    />
     <Picker 
-      style={{height:30}}
+      style={{height:40}}
       selectedValue={order}
       onValueChange={(itemValue, itemIndex) =>{
         setOrder(itemIndex)}}
@@ -40,6 +54,7 @@ const SortBy = ({order, setOrder}) => {
       <Picker.Item label="Highest rated repositories" value="highestRate"/>
       <Picker.Item label="Lowest rated repositories" value="lowesRate"/>
     </Picker>
+    </View>
   )
 }
 
