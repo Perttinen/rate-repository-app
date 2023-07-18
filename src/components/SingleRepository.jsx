@@ -14,8 +14,6 @@ const SingleRepository  = () => {
     fetchPolicy: 'cache-and-network'}
   )
 
-  console.log(repository);
-
   const reviews = useQuery(GET_REVIEWS, {
     variables: {
       "repositoryId": id

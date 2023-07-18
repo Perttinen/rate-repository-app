@@ -14,7 +14,6 @@ const SignUp = () => {
   const [createUser] = useMutation(CREATE_USER)
 
   const onSubmit = async (values) => {
-    console.log('values: ', values);
     const { username, password } = values;
 
     try {
