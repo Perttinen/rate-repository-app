@@ -19,14 +19,14 @@ const SignUp = () => {
     try {
       await createUser({variables:{user:{username: username, password: password}}})
     } catch (e) {
-      console.log('create error: ', e);
+      alert(e)
     }
 
     try {
       await signIn({ username, password });
       navigate('/')
     } catch (e) {
-      console.log('sign error: ',e);
+      alert(e)
     }
   };
   return <SignInContainer onSubmit={onSubmit}/>

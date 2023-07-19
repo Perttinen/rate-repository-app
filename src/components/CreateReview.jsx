@@ -1,29 +1,25 @@
 
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import { useNavigate, useParams } from 'react-router-native';
+import { useNavigate } from 'react-router-native';
 import { useMutation } from '@apollo/client';
-import { useEffect } from 'react';
 
 import CreateReviewForm from './CreateReviewForm';
 import { REVIEW } from '../graphql/mutations';
 
 const CreateReview = () => {
-  const currentUser = useParams().currentUser
   const navigate = useNavigate();
   const [mutate] = useMutation(REVIEW);
 
-  useEffect(() => {
-    if(currentUser === 'null') {
-      alert('Sign in to create reviews!')
-      navigate('/')
-    }},[])
-
   const onSubmit = async (values) => {
+    try{
     const review = {...values, rating: parseInt(values.rating)}
     const repoId = await mutate({variables: {review}})
     const path = "/singleRepo/" + repoId.data.createReview.repository.id;
     navigate(path)
+    }catch(e){
+      alert(e)
+    }
   };
   return <CreateReviewContainer onSubmit={onSubmit}/>
 }

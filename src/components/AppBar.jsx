@@ -32,13 +32,14 @@ const path = "/createReview/" + currentUser
     <View style={styles.container}>
       <ScrollView horizontal>
         <AppBarItem to="/">Repositories</AppBarItem>
-        <AppBarItem to={path}>Create a review</AppBarItem>
+        {currentUser && <AppBarItem to={path}>Create a review</AppBarItem>}
+        {currentUser && <AppBarItem to="/myReviews">My reviews</AppBarItem>}
         {currentUser ? (
           <AppBarItem onPress={handleSignOut}>Sign out</AppBarItem>
         ) : (
           <AppBarItem to="/sign-in">Sign in</AppBarItem>
         )}
-        <AppBarItem to="/sign-up">Sign up</AppBarItem>
+        {!currentUser && <AppBarItem to="/sign-up">Sign up</AppBarItem>}
       </ScrollView>
     </View>
   )

@@ -4,7 +4,6 @@ import { GET_REPOSITORIES } from '../graphql/queries';
 
 
 const useRepositories = (order, searchQuery) => {
-
   let variables = null
   switch (order) {
     case 1:
@@ -27,15 +26,14 @@ const useRepositories = (order, searchQuery) => {
     fetchPolicy: 'cache-and-network'
   })
 
-  if(result.loading){
-    return []
-  }
-
-  return {
-    repositories: result.data.repositories,
-    loading: result.loading,
-    refetch: result.refetch
-  }
+  return(
+    result.loading 
+      ? [] 
+      : {repositories: result.data.repositories,
+        loading: result.loading,
+        refetch: result.refetch
+        }
+  )
 }
 
 export default useRepositories
