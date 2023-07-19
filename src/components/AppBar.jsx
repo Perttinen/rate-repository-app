@@ -20,9 +20,9 @@ const {data} = useQuery(GET_ME, {
 const currentUser = data?.me;
 
 const handleSignOut = async () => {
+  navigate('/')
   await authStorage.removeAccessToken()
   await apolloClient.resetStore()
-  navigate('/')
   console.log('signed out');
 };
 

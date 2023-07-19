@@ -6,16 +6,19 @@ import { GET_ME } from "../graphql/queries"
 import ReviewItem from "./ReviewItem"
 
 const MyReviews = () => {
-  const currentUser = useQuery(GET_ME, {
+  const { loading, error, data, refetch } = useQuery(GET_ME, {
     variables: {includeReviews: true},
     fetchPolicy: 'cache-and-network'
   })
 
-  const reviewNodes = currentUser.data
-  ? currentUser.data.me.reviews.edges.map((edge) => {
-    const username = edge.node.repositoryId.replace('.','/')
+  error && console.log(error)
+
+
+  const reviewNodes = data
+  ? data.me.reviews.edges.map((edge) => {
+    const repoHeader = edge.node.repositoryId.replace('.','/')
     return(
-    {...edge.node, user: {username: username}}
+    {...edge.node, user: {repoHeader: repoHeader}}
     )
   })
   : [];
@@ -23,11 +26,11 @@ const MyReviews = () => {
   const ItemSeparator = () => <View style={styles.separator} />;
 
   return (
-    currentUser.loading ? <Text>Loading...</Text> :
+    loading ? <Text>Loading...</Text> :
     <FlatList
       data={reviewNodes}
       ItemSeparatorComponent={ItemSeparator}
-      renderItem={({ item }) => <ReviewItem review={item}/>}
+      renderItem={({ item }) => <ReviewItem review={item} ownReview={true} refetch={refetch}/>}
     />
   );
 }
