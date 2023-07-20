@@ -1,32 +1,18 @@
-import { Text, View, StyleSheet } from "react-native"
 import { FlatList } from "react-native"
-import { useQuery } from "@apollo/client"
 
-import { GET_ME } from "../graphql/queries"
 import ReviewItem from "./ReviewItem"
+import useMyReviews from "../hooks/useMyReviews"
+import ItemSeparator from "./ItemSeparator"
 
 const MyReviews = () => {
-  const { loading, error, data, refetch } = useQuery(GET_ME, {
-    variables: {includeReviews: true},
-    fetchPolicy: 'cache-and-network'
-  })
 
-  error && console.log(error)
-
+  const { data, refetch } = useMyReviews()
 
   const reviewNodes = data
-  ? data.me.reviews.edges.map((edge) => {
-    const repoHeader = edge.node.repositoryId.replace('.','/')
-    return(
-    {...edge.node, user: {repoHeader: repoHeader}}
-    )
-  })
+  ? data.me.reviews.edges.map((edge) => edge.node)
   : [];
 
-  const ItemSeparator = () => <View style={styles.separator} />;
-
   return (
-    loading ? <Text>Loading...</Text> :
     <FlatList
       data={reviewNodes}
       ItemSeparatorComponent={ItemSeparator}
@@ -34,11 +20,5 @@ const MyReviews = () => {
     />
   );
 }
-
-const styles = StyleSheet.create({
-  separator: {
-    height: 10,
-  },
-});
 
 export default MyReviews

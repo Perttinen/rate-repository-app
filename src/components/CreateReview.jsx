@@ -2,24 +2,17 @@
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { useNavigate } from 'react-router-native';
-import { useMutation } from '@apollo/client';
 
 import CreateReviewForm from './CreateReviewForm';
-import { REVIEW } from '../graphql/mutations';
+import useCreateReview from '../hooks/useCreateReview';
 
 const CreateReview = () => {
   const navigate = useNavigate();
-  const [mutate] = useMutation(REVIEW);
-
+  const createReview = useCreateReview()
+  
   const onSubmit = async (values) => {
-    try{
-    const review = {...values, rating: parseInt(values.rating)}
-    const repoId = await mutate({variables: {review}})
-    const path = "/singleRepo/" + repoId.data.createReview.repository.id;
+    const path = await createReview(values)
     navigate(path)
-    }catch(e){
-      alert(e)
-    }
   };
   return <CreateReviewContainer onSubmit={onSubmit}/>
 }
@@ -28,12 +21,13 @@ export default CreateReview
 
 const validationSchema = yup.object().shape({
   ownerName: yup.string()
-  .required('Username is required'),
+  .required('Owner is required'),
   repositoryName: yup.string()
-  .required('Password is required'),
+  .required('Repository name is required'),
   rating: yup.number()
   .min(0)
-  .max(100),
+  .max(100)
+  .required('Rating is required'),
   review: yup.string()
 });
 

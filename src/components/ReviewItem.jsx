@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, TouchableHighlight } from "react-native"
+import { StyleSheet, View, Text, TouchableHighlight, Alert } from "react-native"
 import { format } from "date-fns"
 import * as WebBrowser from 'expo-web-browser';
 import { useMutation } from "@apollo/client";
@@ -7,6 +7,16 @@ import theme from "../theme"
 import { DELETE_REVIEW } from "../graphql/mutations";
 
 const ReviewItem = ({review, ownReview, refetch}) => {
+
+  const createTwoButtonAlert = () =>
+  Alert.alert('Delete rview?', 'Are yuo sure...?', [
+    {
+      text: 'Cancel',
+      style: 'cancel',
+    },
+    {text: 'OK', onPress: () => deleteRepository()},
+  ]);
+
   const [mutate] = useMutation(DELETE_REVIEW)
   const reviewDate = format(new Date(review.createdAt), 'dd.MM.yyyy')
 
@@ -15,15 +25,15 @@ const ReviewItem = ({review, ownReview, refetch}) => {
   }
 
   const deleteRepository = async () => {
-    if(window.confirm('Delete review?')){
       try{
         await mutate({variables: {"deleteReviewId": review.id}})
         refetch({includeReviews: true})
       }catch(e){
         alert(e)
       }
-    }
   }
+
+  const reviewHeader = ownReview ? review.repository.fullName : review.user.username
 
   return( 
     <View style={styles.mainContainer}>
@@ -32,7 +42,7 @@ const ReviewItem = ({review, ownReview, refetch}) => {
           <Text style={styles.text}>{review.rating}</Text>
         </View>
         <View style={styles.columnContainer}>
-          <Text style={{fontWeight:theme.fontWeights.bold, fontSize: theme.fontSizes.subheading}}>{review.user.repoHeader}</Text>
+          <Text style={{fontWeight:theme.fontWeights.bold, fontSize: theme.fontSizes.subheading}}>{reviewHeader}</Text> 
           <Text style={{marginTop:5}}>{reviewDate}</Text>
           <Text style={{marginTop:5}}>{review.text}</Text>
         </View>
@@ -41,7 +51,7 @@ const ReviewItem = ({review, ownReview, refetch}) => {
         <TouchableHighlight style={{...styles.button, backgroundColor:'#348bda'}} onPress={viewRepository}>
           <Text style={styles.buttonText}>View repository</Text>
         </TouchableHighlight>
-        <TouchableHighlight style={{...styles.button, backgroundColor:'#ec3d3d'}} onPress={deleteRepository}>
+        <TouchableHighlight style={{...styles.button, backgroundColor:'#ec3d3d'}} onPress={createTwoButtonAlert}>
           <Text style={styles.buttonText}>Delete review</Text>
         </TouchableHighlight>
       </View>}

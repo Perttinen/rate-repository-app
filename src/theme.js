@@ -31,15 +31,21 @@ const theme = {
 };
 
 export const fullWidthButton = {
-  flex: 1,
-  display: 'flex',
-  alignItems: 'stretch',
   justifyContent: 'center',
   alignContent: "center",
+  height: 40,
   backgroundColor: theme.colors.primary,
   borderRadius: 5,
-  borderWidth: 4,
-  borderColor: theme.colors.primary,
+}
+
+export const input = {
+  marginBottom:10,
+  borderColor: theme.colors.inputBorder,
+  borderWidth: 2,
+  borderRadius: 5,
+  padding: 5,
+  paddingLeft: 10,
+  height:40
 }
 
 export default theme;

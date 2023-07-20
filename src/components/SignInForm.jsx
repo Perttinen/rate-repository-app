@@ -2,7 +2,7 @@ import { View, StyleSheet, Text, TouchableHighlight} from "react-native";
 
 import theme from "../theme";
 import FormikTextInput from "./FormikTextInput";
-import { fullWidthButton } from "../theme";
+import { fullWidthButton, input } from "../theme";
 
 const SignInForm = ({ onSubmit }) => {
   return (
@@ -18,19 +18,12 @@ const SignInForm = ({ onSubmit }) => {
 
 const styles = StyleSheet.create({
   fullWidthButton,
+  input,
   container:{
     flexDirection: 'column',
     backgroundColor: theme.colors.light,
     justifyContent: 'space-evenly',
     padding:10,
-  },
-  input:{  
-    marginBottom:10,
-    borderColor: theme.colors.inputBorder,
-    borderWidth: 2,
-    borderRadius: 5,
-    padding: 5,
-    paddingLeft: 10,
   },
   text:{
     color: theme.colors.light,

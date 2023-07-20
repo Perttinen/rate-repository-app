@@ -5,7 +5,6 @@ import theme from '../theme';
 import Text from './Text';
 
 const AppBarItem = ({ to, onPress, children}) => {
-
   return onPress ? (
     <Pressable onPress={onPress} style={styles.flexItem}>
       <Text color='light' fontSize='subheading' fontWeight='bold' >
